@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/animation/animation_page.dart';
 import 'package:instagram/pages/home_page.dart';
 import 'package:instagram/pages/signup_page.dart';
 
@@ -42,11 +41,21 @@ class _SignInPageState extends State<SignInPage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.pink,
+              Colors.pinkAccent,
+              Colors.yellow.withOpacity(0.6)
+            ]
+          )
+        ),
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            (1, Text('Instagram', style: TextStyle(fontSize: 45, fontFamily: 'Billabong'),),),
+            Text('Instagram', style: TextStyle(fontSize: 45, fontFamily: 'Billabong'),),
 
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 15),
@@ -90,14 +99,26 @@ class _SignInPageState extends State<SignInPage> with SingleTickerProviderStateM
               margin: EdgeInsets.only(left: 20, right: 20, top: 15),
               width: double.infinity,
               height: 48,
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                onPressed: (){
-                  _doSignIn();
-                },
-                color: Colors.blue,
-                textColor: Colors.white,
-                child: Text('Log In', style: TextStyle(fontSize: 16),),
+              child: ElevatedButton(
+                onPressed: () {_doSignIn();},
+                style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [Colors.pink ,Colors.pinkAccent, Colors.yellow]),
+                      borderRadius: BorderRadius.circular(20)),
+
+
+                  child: Container(
+                    width: double.infinity,
+                    height: 48,
+                    alignment: Alignment.center,
+                    child: Text('Sign In', style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
               ),
             ),
 
@@ -116,7 +137,6 @@ class _SignInPageState extends State<SignInPage> with SingleTickerProviderStateM
                 ],
               ),
             )
-
           ],
         ),
       ),

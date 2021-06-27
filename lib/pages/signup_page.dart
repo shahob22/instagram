@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/animation/animation_page.dart';
 import 'package:instagram/pages/home_page.dart';
 import 'package:instagram/pages/signin_page.dart';
 
@@ -32,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Text('Instagram', style: TextStyle(fontSize: 45, fontFamily: 'Billabong'),),
 
-            Container(
+            FadeAnimation(1, Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 15),
               height: 48,
               decoration: BoxDecoration(
@@ -49,9 +50,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintStyle: TextStyle(color: Colors.grey)
                 ),
               ),
-            ),
+            ),),
 
-            Container(
+            FadeAnimation(0.9, Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 15),
               height: 48,
               decoration: BoxDecoration(
@@ -68,7 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintStyle: TextStyle(color: Colors.grey)
                 ),
               ),
-            ),
+            ),),
 
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 15),

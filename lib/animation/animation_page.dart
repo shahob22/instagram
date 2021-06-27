@@ -21,7 +21,7 @@ class FadeAnimation extends StatelessWidget{
       tween: tween,
       child: child,
 
-      builderWithChild: (context, child, animation) => Opacity(
+      builderWithChild: (context, child,Map<String, dynamic> animation) => Opacity(
         opacity: animation['opacity'],
         child: Transform.translate(
           offset: Offset(0, animation['translateY']),
