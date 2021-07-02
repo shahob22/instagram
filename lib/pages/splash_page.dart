@@ -6,7 +6,7 @@ import 'package:instagram/pages/signin_page.dart';
 
 class SplashPage extends StatefulWidget {
   static final id = 'splash_page';
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -18,7 +18,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 3),(){
       if (isLoggedIn) {

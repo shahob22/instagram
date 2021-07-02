@@ -1,144 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/animation/animation_page.dart';
 import 'package:instagram/pages/home_page.dart';
 import 'package:instagram/pages/signup_page.dart';
 
 class SignInPage extends StatefulWidget {
   static final id = 'signin_page';
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> with SingleTickerProviderStateMixin{
-  late AnimationController _controller;
-  late Animation _animation;
+class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin{
 
-  TextEditingController _emain = TextEditingController();
+  TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
 
   _doSignIn(){
-    if (_emain.text.isNotEmpty && _password.text.isNotEmpty){
+    if (_email.text.isNotEmpty && _password.text.isNotEmpty){
       Navigator.pushReplacementNamed(context, HomePage.id);
     }
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controller = AnimationController(vsync: this,
-      duration: Duration(milliseconds: 300)
-    );
-    _animation = Tween<double>(begin: 1.0, end: 30.0).animate(_controller)
-    ..addStatusListener((status) {
-      if (status == AnimationStatus.completed){
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.pink,
-              Colors.pinkAccent,
-              Colors.yellow.withOpacity(0.6)
-            ]
-          )
-        ),
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Instagram', style: TextStyle(fontSize: 45, fontFamily: 'Billabong'),),
-
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 15),
-              height: 48,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey[200]
-              ),
-              child: TextField(
-                controller: _emain,
-                style: TextStyle(fontSize: 16),
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
-                    hintText: 'Email',
-                    hintStyle: TextStyle(color: Colors.grey)
-                ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FadeAnimation(1, Text('Instagram', style: TextStyle(fontSize: 45, fontFamily: 'Billabong'),),),
+          FadeAnimation(1.2, Container(
+            margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+            height: 48,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey[200]
+            ),
+            child: TextField(
+              controller: _email,
+              style: TextStyle(fontSize: 16),
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                  hintText: 'Email',
+                  hintStyle: TextStyle(color: Colors.grey)
               ),
             ),
-
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 15),
-              height: 48,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey[200]
-              ),
-              child: TextField(
-                controller: _password,
-                style: TextStyle(fontSize: 16),
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
-                    hintText: 'Password',
-                    hintStyle: TextStyle(color: Colors.grey)
-                ),
+          )),
+          FadeAnimation(1.3, Container(
+            margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+            height: 48,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey[200]
+            ),
+            child: TextField(
+              obscureText: true,
+              controller: _password,
+              style: TextStyle(fontSize: 16),
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                  hintText: 'Password',
+                  hintStyle: TextStyle(color: Colors.grey)
               ),
             ),
-
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 15),
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: () {_doSignIn();},
-                style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                ),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [Colors.pink ,Colors.pinkAccent, Colors.yellow]),
-                      borderRadius: BorderRadius.circular(20)),
-
-
-                  child: Container(
-                    width: double.infinity,
-                    height: 48,
-                    alignment: Alignment.center,
-                    child: Text('Sign In', style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ),
+          )),
+          FadeAnimation(1.5, Container(
+            margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+            width: double.infinity,
+            height: 48,
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              onPressed: (){
+                _doSignIn();
+              },
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: Text('Log In', style: TextStyle(fontSize: 16),),
             ),
-
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 20, right: 20, top: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('Don`t have an account?', style: TextStyle(color: Colors.grey)),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, SignUpPage.id);
-                      },
-                      child: Text('Sign Up', style: TextStyle(color: Colors.black),)),
-                ],
-              ),
-            )
-          ],
-        ),
+          )),
+          FadeAnimation(1.5, Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text('Don`t have an account?', style: TextStyle(color: Colors.grey)),
+                TextButton(onPressed: () {
+                  Navigator.pushReplacementNamed(context, SignUpPage.id);
+                },
+                    child: Text('Sign up', style: TextStyle(color: Colors.black),)),
+              ],
+            ),
+          )),
+        ],
       ),
     );
   }
